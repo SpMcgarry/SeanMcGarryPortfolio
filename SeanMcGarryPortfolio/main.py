@@ -35,8 +35,8 @@ def home():
 <link rel="File-List" href="Sean_McGarry_Resume_web.fld/filelist.xml">
 <!--[if gte mso 9]><xml>
  <o:DocumentProperties>
-  <o:Author>Fitzgerald, Katie</o:Author>
-  <o:LastAuthor>Fitzgerald, Katie</o:LastAuthor>
+  <o:Author>McGarry, Sean</o:Author>
+  <o:LastAuthor>McGarry, Sean</o:LastAuthor>
   <o:Revision>3</o:Revision>
   <o:TotalTime>56</o:TotalTime>
   <o:LastPrinted>2024-02-08T16:42:00Z</o:LastPrinted>
