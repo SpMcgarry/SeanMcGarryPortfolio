@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search and Table</title>
+<style>
+    .container {
+        display: flex;
+    }
+    .left-column, .right-column {
+        flex: 1;
+        padding: 10px;
+    }
+    .search-field {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .table-container {
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
 
+<div class="container">
+    <div class="left-column">
+        <input type="text" class="search-field" placeholder="Search...">
+    </div>
+    <div class="right-column">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                        <th>Header 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="space-column">
+        <!-- Add content for the space column -->
+    </div>
+</div>
+
+</body>
+</html>
