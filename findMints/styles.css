@@ -1,1 +1,64 @@
+/* Add your CSS styles here */
+
+/* Reset default margin and padding */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply styles to the header */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Apply styles to the container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Apply styles to the sidebar */
+.sidebar {
+    flex: 0 0 20%;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Apply styles to the main content */
+.content {
+    flex: 0 0 75%;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Apply styles to the search bar */
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Apply styles to the columns */
+.column {
+    flex: 0 0 30%;
+    background-color: #e0e0e0;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .content, .column {
+        flex: 0 0 100%;
+    }
+}
 
