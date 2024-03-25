@@ -1,12 +1,14 @@
 # __init__.py
 from flask import Flask
+#from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sigmintdata.db'
 db = SQLAlchemy(app)
 
-from app import models
+#from app import models
 
 # Initialize database tables within application context
 with app.app_context():

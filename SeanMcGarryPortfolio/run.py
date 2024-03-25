@@ -1,6 +1,5 @@
 # models.py
-from app import db
-
+from specialMints import db
 # Define SQLAlchemy models
 class Comic(db.Model):
     __tablename__ = 'comic'
