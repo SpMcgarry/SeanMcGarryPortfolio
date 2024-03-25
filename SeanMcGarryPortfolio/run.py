@@ -1,5 +1,11 @@
 # models.py
+from flask import app
 from specialMints import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+
 # Define SQLAlchemy models
 class Comic(db.Model):
     __tablename__ = 'comic'
@@ -33,3 +39,5 @@ class Collectible(db.Model):
     link = db.Column(db.Text)
 
 # Define other models and relationships here
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)
