@@ -2,10 +2,18 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-# Configure the database URI
+
+# Configuration for the first database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SpmResumeData.db.sql'
-# Example: sqlite:///app.db
+app.config['SQLALCHEMY_BINDS'] = {
+    'sigmintdata': 'sqlite:///sigmintdata.db.sql'
+}
+
+# Create a single SQLAlchemy instance
 db = SQLAlchemy(app)
+
+# Import models from the specialMints/models directory
+from specialMints.models import Comic, Collectible
 
 # Define a model for your database table
 class Item(db.Model):
@@ -20,8 +28,8 @@ def home():
         item = Item(name="Sample Item")
         db.session.add(item)
         db.session.commit()
-
     return """
+    
     <html>
         <head>
             <title>Main Page</title>
