@@ -1,0 +1,5 @@
+#This is a project i am workign on to learn SQL and AI chat bots in relation to relational databases and llms 
+#the premis is to compliment the Wep page for the Resume and include a chatbot where the user can drop a job description and desired atributes. 
+#the chat bot will then review it, and compare with the web page resume and offer recomendations based on the resumeand a back end database of past varients of the resume.
+#I will also add  invites to meeting butons to integrate with google cal and meet etc. Via Hubspot integratoon as well.
+# initial code will be modified from chatgpt conversations and dimilar open source code.
