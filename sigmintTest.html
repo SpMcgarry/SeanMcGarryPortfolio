@@ -1,0 +1,93 @@
+#chatgpt test
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/43724279.js"></script>
+    <!-- End of HubSpot Embed Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9F0287R3R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-J9F0287R3R');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+<!-- Content for the first page -->
+<div class="container">
+    <div class="left-column">
+        <input type="text" id="search-input" class="search-field" placeholder="Search...">
+        <button onclick="search()">Search</button>
+    </div>
+    <div class="right-column">
+        <div class="table-container" id="search-results">
+            <!-- Search results will be displayed here -->
+        </div>
+    </div>
+    <div class="space-column">
+        <!-- Add content for the space column -->
+    </div>
+</div>
+
+<!-- Content for the second page -->
+<div>
+    <h1>Welcome to the Search Page</h1>
+    <!-- Add your search form here -->
+</div>
+
+<script>
+    function search() {
+        var searchTerm = document.getElementById('search-input').value;
+
+        // Make AJAX request to the backend server
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/api/search?term=' + searchTerm, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    displaySearchResults(response);
+                } else {
+                    console.error('Failed to fetch search results.');
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
+    function displaySearchResults(results) {
+        var table = '<table>';
+        table += '<thead><tr><th>Title</th><th>Issue Number</th><th>Publisher</th></tr></thead>';
+        table += '<tbody>';
+
+        results.forEach(function (result) {
+            table += '<tr>';
+            table += '<td>' + result.Title + '</td>';
+            table += '<td>' + result.IssueNumber + '</td>';
+            table += '<td>' + result.Publisher + '</td>';
+            table += '</tr>';
+        });
+
+        table += '</tbody></table>';
+
+        document.getElementById('search-results').innerHTML = table;
+    }
+</script>
+
+</body>
+</html>
