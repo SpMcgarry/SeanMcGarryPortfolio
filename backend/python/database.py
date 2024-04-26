@@ -4,7 +4,7 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        self.conn = sqlite3.connect('your_database.db')  # Connect to your database
+        self.conn = sqlite3.connect('sigmintdata.db.sql')  # Connect to your database
         self.cursor = self.conn.cursor()
 
     def get_comic_books(self):
