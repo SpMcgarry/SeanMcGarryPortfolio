@@ -4,6 +4,12 @@
 # a collector can search the item and see what numbers relate significantly such as first appearance dats or creater birth day and if they fall within the established set of editions
 # I may learn some block chain and nft methods to implement a sort of ownersip of numbers or a way for a user to display  such collectibels via a certificate nft that can be linked to the collectible data in the database.When the actual item is sold the nft can be sold with it. 
 
+#specia mints is a project for me to learn SQL Web apps and Database structures / utilites 
+#I may include some socail elements inviting opinion ,coments and voting towards establishing on demand edition numbers
+# the plan is to have a databse of pop culture , collectibel items that are release in numbered editions
+# a collector can search the item and see what numbers relate significantly such as first appearance dats or creater birth day and if they fall within the established set of editions
+# I may learn some block chain and nft methods to implement a sort of ownersip of numbers or a way for a user to display  such collectibels via a certificate nft that can be linked to the collectible data in the database.When the actual item is sold the nft can be sold with it. 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,22 +35,26 @@
 
 <body>
 
-<!-- Content for the first page -->
+<!-- search db-->
 <div class="container">
     <div class="left-column">
-        <input type="text" class="search-field" placeholder="Search...">
+        <input type="text" id="search-field" placeholder="Search...">
+      <button         onclick="search()">Search</button>
     </div>
     <div class="right-column">
         <div class="table-container">
-            <table>
+            <table> id="search-results">
                 <thead>
                     <tr>
-                        <th>Page Under Construction</th>
+                        <th>"Page Under Construction
+                        "</th>
                         <th>Header 2</th>
                         <th>Header 3</th>
                     </tr>
                 </thead>
+              
                 <tbody>
+                  <!-- search results -->
                     <tr>
                         <td>Data 1</td>
                         <td>Data 2</td>
@@ -60,11 +70,44 @@
     </div>
 </div>
 
-<!-- Content for the second page -->
-<div>
-    <h1>Welcome to the Search Page</h1>
-    <!-- Add your search form here -->
-</div>
 
+</div> 
+  
+<script>
+  function search() {
+    var searchInput =  document.getElementById('search-field').value;
+    
+    console.log('Search term:', searchInput);
+    //<!-- rest ofthis script from chatgpt conversation deciding to stick with JS over tyring to figure outhow to do this just in  Pyhton. -->
+      
+    // Send an AJAX request to the server to retrieve search results
+        var xhr = new XMLHttpRequest();
+        // Construct the URL with the search term as a query parameter
+        xhr.open('GET', '/specialMints?searchInput=' + encodeURIComponent(searchInput), true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Clear previous search results
+                var tableBody = document.querySelector('#search-results tbody');
+                tableBody.innerHTML = '';
+
+                // Parse the JSON response and populate the table with search results
+                var data = JSON.parse(xhr.responseText);
+                data.forEach(function(row) {
+                    var newRow = document.createElement('tr');
+                    newRow.innerHTML = '<td>' + row.column1 + '</td>' +
+                                       '<td>' + row.column2 + '</td>' +
+                                       '<td>' + row.column3 + '</td>';
+                    tableBody.appendChild(newRow);
+                });
+            } else {
+                console.error('Failed to retrieve search results. Status code: ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+  }
+  
+</script>
 </body>
 </html>
