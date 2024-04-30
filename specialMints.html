@@ -13,101 +13,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/43724279.js"></script>
-    <!-- End of HubSpot Embed Code -->
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9F0287R3R"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-J9F0287R3R');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Special Mints</title>
 </head>
-
 <body>
 
-<!-- search db-->
+<!-- Search form -->
 <div class="container">
     <div class="left-column">
-        <input type="text" id="search-field" placeholder="Search...">
-      <button         onclick="search()">Search</button>
-    </div>
-    <div class="right-column">
-        <div class="table-container">
-            <table> id="search-results">
-                <thead>
-                    <tr>
-                        <th>"Page Under Construction
-                        "</th>
-                        <th>Header 2</th>
-                        <th>Header 3</th>
-                    </tr>
-                </thead>
-              
-                <tbody>
-                  <!-- search results -->
-                    <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="space-column">
-        <!-- Add content for the space column -->
+        <input type="text" id="search-input" placeholder="Search...">
+        <button onclick="search()">Search</button>
     </div>
 </div>
 
+<!-- Display search results -->
+<div id="search-results">
+    <!-- Search results will be displayed here -->
+</div>
 
-</div> 
-  
 <script>
-  function search() {
-    var searchInput =  document.getElementById('search-field').value;
+function search() {
+    // Get the search term from the input field
+    var searchTerm = document.getElementById('search-input').value;
     
-    console.log('Search term:', searchInput);
-    //<!-- rest ofthis script from chatgpt conversation deciding to stick with JS over tyring to figure outhow to do this just in  Pyhton. -->
-      
-    // Send an AJAX request to the server to retrieve search results
-        var xhr = new XMLHttpRequest();
-        // Construct the URL with the search term as a query parameter
-        xhr.open('GET', '/specialMints?searchInput=' + encodeURIComponent(searchInput), true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Clear previous search results
-                var tableBody = document.querySelector('#search-results tbody');
-                tableBody.innerHTML = '';
+    // Send an HTTP GET request to the backend with the search term
+    fetch('/specialMints?search_query=' + encodeURIComponent(searchTerm))
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data
+            displaySearchResults(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
-                // Parse the JSON response and populate the table with search results
-                var data = JSON.parse(xhr.responseText);
-                data.forEach(function(row) {
-                    var newRow = document.createElement('tr');
-                    newRow.innerHTML = '<td>' + row.column1 + '</td>' +
-                                       '<td>' + row.column2 + '</td>' +
-                                       '<td>' + row.column3 + '</td>';
-                    tableBody.appendChild(newRow);
-                });
-            } else {
-                console.error('Failed to retrieve search results. Status code: ' + xhr.status);
-            }
-        };
-        xhr.send();
-    }
-  }
-  
+function displaySearchResults(results) {
+    // Get the container for search results
+    var resultsContainer = document.getElementById('search-results');
+    
+    // Clear previous search results
+    resultsContainer.innerHTML = '';
+    
+    // Create a new HTML table to display search results
+    var table = document.createElement('table');
+    
+    // Create table headers
+    var headers = Object.keys(results);
+    var headerRow = document.createElement('tr');
+    headers.forEach(headerText => {
+        var th = document.createElement('th');
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    
+    // Add search results to the table
+    var row = document.createElement('tr');
+    Object.values(results).forEach(value => {
+        var cell = document.createElement('td');
+        cell.textContent = value;
+        row.appendChild(cell);
+    });
+    table.appendChild(row);
+    
+    // Append the table to the results container
+    resultsContainer.appendChild(table);
+}
 </script>
+
 </body>
 </html>
