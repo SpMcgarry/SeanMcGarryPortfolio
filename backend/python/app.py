@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+<<<<<<< HEAD
 import sqlite3
 
 app = Flask(__name__)
@@ -41,6 +42,35 @@ def search_data():
             return jsonify({'message': 'No items found related to the given name.'})
     except Exception as e:
         return jsonify({'error': str(e)})
+=======
+from database import Database
+import sqlite3
+from app.py import userInput
+
+app = Flask(__name__)
+
+conn = sqlite3.connect('sigmintdata.db.sql') #db initialised ()
+cursor = conn.cursor()
+
+@app.route('/specialMints', methods=['GET'])
+#created database , linked it now to #get the user #search data and conver #to sql querie variable 
+
+def search_data():
+  userInput = request.args.get('searchInput')
+  
+  cursor.execute("SELECT * FROM your_table WHERE your_column LIKE ?", ('%' + userInput + '%',))
+  # Fetch the search results
+  search_results = cursor.fetchall()
+
+  # Close the cursor and connection
+  cursor.close()
+  conn.close()
+
+  # Convert the search results to JSON format and return them
+  return jsonify(search_results)
+
+  
+>>>>>>> 27cf07f (commit test from replit)
 
 if __name__ == '__main__':
     app.run(debug=True)
