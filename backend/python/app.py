@@ -48,17 +48,18 @@ import sqlite3
 from app.py import userInput
 
 app = Flask(__name__)
-
-conn = sqlite3.connect('sigmintdata.db.sql') #db initialised ()
+#test merge
+conn = sqlite3.connect('sigmintdata.db.sql')  #db initialised ()
 cursor = conn.cursor()
 
-@app.route('/specialMints', methods=['GET'])
-#created database , linked it now to #get the user #search data and conver #to sql querie variable 
 
+@app.route('/specialMints', methods=['GET'])
+#created database , linked it now to #get the user #search data and conver #to sql querie variable
 def search_data():
   userInput = request.args.get('searchInput')
-  
-  cursor.execute("SELECT * FROM your_table WHERE your_column LIKE ?", ('%' + userInput + '%',))
+
+  cursor.execute("SELECT * FROM your_table WHERE your_column LIKE ?",
+                 ('%' + userInput + '%', ))
   # Fetch the search results
   search_results = cursor.fetchall()
 
@@ -69,9 +70,15 @@ def search_data():
   # Convert the search results to JSON format and return them
   return jsonify(search_results)
 
+<<<<<<< HEAD
   
 >>>>>>> 27cf07f (commit test from replit)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
+=======
+
+if __name__ == '__main__':
+  app.run(debug=True)
+>>>>>>> 7bc75c5 (>>> head. issue)
