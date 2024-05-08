@@ -13,7 +13,9 @@
               <button onclick="search()">Search</button>
           </div>
       </div>
- <!-- Display search results -->
+  
+ 
+      <!-- Display search results -->
       <div id="search-results">
           <!-- Search results will be displayed here -->
       </div>
@@ -40,33 +42,33 @@
               var resultsContainer = document.getElementById('search-results');
 
               // Clear previous search results
-              resultsContainer.innerHTML = '';  
-    // Create a new HTML table to display search results
-    var table = document.createElement('table');
-    
-    // Create table headers
-    var headers = Object.keys(results);
-    var headerRow = document.createElement('tr');
-    headers.forEach(headerText => {
-        var th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
-    
-    // Add search results to the table
-    var row = document.createElement('tr');
-    Object.values(results).forEach(value => {
-        var cell = document.createElement('td');
-        cell.textContent = value;
-        row.appendChild(cell);
-    });
-    table.appendChild(row);
-    
-    // Append the table to the results container
-    resultsContainer.appendChild(table);
-}
-</script>
+              resultsContainer.innerHTML = '';
 
+              // Create a new HTML table to display search results
+              var table = document.createElement('table');
+
+              // Create table headers
+              var headers = Object.keys(results);
+              var headerRow = document.createElement('tr');
+              headers.forEach(headerText => {
+                  var th = document.createElement('th');
+                  th.textContent = headerText;
+                  headerRow.appendChild(th);
+              });
+              table.appendChild(headerRow);
+
+              // Add search results to the table
+              var row = document.createElement('tr');
+              Object.values(results).forEach(value => {
+                  var cell = document.createElement('td');
+                  cell.textContent = value;
+                  row.appendChild(cell);
+              });
+              table.appendChild(row);
+
+              // Append the table to the results container
+              resultsContainer.appendChild(table);
+          }
+      </script>
   </body>
   </html>
