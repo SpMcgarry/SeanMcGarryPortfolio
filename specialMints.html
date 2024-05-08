@@ -13,33 +13,34 @@
               <button onclick="search()">Search</button>
           </div>
       </div>
+<<<<<<< HEAD
 
       <!-- Display search results -->
       <div id="search-results">
           <!-- Search results will be displayed here -->
       </div>
-      
-<script>
-function search() {
-    // Get the search term from the input field
-    var searchTerm = document.getElementById('search-input').value;
-    
-    // Send an HTTP GET request to the backend with the search term
-    fetch('/specialMints?search_query=' + encodeURIComponent(searchTerm))
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response data
-            displaySearchResults(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
 
-function displaySearchResults(results) {
-    // Get the container for search results
-    var resultsContainer = document.getElementById('search-results');
-    
+      <script>
+          function search() {
+              // Get the search term from the input field
+              var searchTerm = document.getElementById('search-input').value;
+
+              // Send an HTTP GET request to the backend with the search term
+              fetch('/specialMints?search_query=' + encodeURIComponent(searchTerm))
+                  .then(response => response.json())
+                  .then(data => {
+                      // Handle the response data
+                      displaySearchResults(data);
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                  });
+          }
+
+          function displaySearchResults(results) {
+              // Get the container for search results
+              var resultsContainer = document.getElementById('search-results');
+}
     // Clear previous search results
     resultsContainer.innerHTML = '';
     
