@@ -45,6 +45,10 @@
 
               // Create a new HTML table to display search results
               var table = document.createElement('table');
+
+              // Create table headers
+              var headers = Object.keys(results);
+
               var headerRow = document.createElement('tr');
               headers.forEach(headerText => {
                   var th = document.createElement('th');
