@@ -41,7 +41,7 @@ def search_data():
             return jsonify({'message': 'No items found related to the given name.'})
     except Exception as e:
         return jsonify({'error': str(e)})
-        
+
 if __name__ == '__main__':
     app.run(debug=True)
 
