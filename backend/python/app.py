@@ -4,7 +4,7 @@ import sqlite3
 app = Flask(__name__)
 
 # Connect to the SQLite database
-conn = sqlite3.connect('your_database.db')
+conn = sqlite3.connect('sigmintdata.db.sql')
 cursor = conn.cursor()
 
 @app.route('/')
