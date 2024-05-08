@@ -42,6 +42,7 @@ def search_data():
             return jsonify({'message': 'No items found related to the given name.'})
     except Exception as e:
         return jsonify({'error': str(e)})
+<<<<<<< HEAD
 =======
 from database import Database
 import sqlite3
@@ -73,12 +74,17 @@ def search_data():
 <<<<<<< HEAD
   
 >>>>>>> 27cf07f (commit test from replit)
+=======
+>>>>>>> 0980007 (testing commit from replete)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
+<<<<<<< HEAD
 =======
 
 if __name__ == '__main__':
   app.run(debug=True)
 >>>>>>> 7bc75c5 (>>> head. issue)
+=======
+>>>>>>> 0980007 (testing commit from replete)
