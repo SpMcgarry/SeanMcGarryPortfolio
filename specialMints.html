@@ -16,52 +16,34 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     </script>
+
 </head>
 <body>
-  
+    <h1> Search for Significan Edition Numbers Related to Your Inpuyt</h1>
 <!-- Search form -->
 <div class="container">
     <div class="left-column">
-        <input type="text" id="search-input" placeholder="Search...">
+        <input type="text" id="search-box" placeholder="Search IP , Character , Colletible for related numbers or search a number to see a list of related IP ,publishers, characters and collectibles">
         <button onclick="search()">Search</button>
+        <ul id="results"></ul>ul>
     </div>
 </div>
-
-<!-- Display search results -->
-<div id="search-results">
-    <!-- Search results will be displayed here -->
-</div>
-g
+<!--Search Function taken from chatgpt discussion -->
 <script>
-function search() {
-    var searchTerm = document.getElementById('search-input').value;
-    
-    console.log('Search term:', searchTerm);
-      
-    // Send an AJAX request to the server to retrieve search results
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/specialMints?searchInput=' + encodeURIComponent(searchTerm), true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var tableBody = document.querySelector('#search-results tbody');
-            tableBody.innerHTML = '';
-
-            var data = JSON.parse(xhr.responseText);
-            data.forEach(function(row) {
-                var newRow = document.createElement('tr');
-                newRow.innerHTML = '<td>' + row.column1 + '</td>' +
-                                   '<td>' + row.column2 + '</td>' +
-                                   '<td>' + row.column3 + '</td>';
-                tableBody.appendChild(newRow);
-            });
-        } else {
-            console.error('Failed to retrieve search results. Status code: ' + xhr.status);
+        function search() {
+            const query = document.getElementById('search-box').value;
+            fetch(`/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsList = document.getElementById('results');
+                    resultsList.innerHTML = '';
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = `${item.title} - ${item.publisher} (Released: ${item.release_date}, Edition: ${item.edition})`;
+                        resultsList.appendChild(li);
+                    });
+                });
         }
-    };
-    xhr.send();
-}
-</script>
-
+    </script>
 </body>
 </html>
