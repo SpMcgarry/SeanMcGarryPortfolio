@@ -19,29 +19,30 @@
 
 </head>
 <body>
-    <h1> Search for Significan Edition Numbers Related to Your Input</h1>
-<!-- Search form -->
-<div class="container">
-    <div class="left-column">
-        <input type="text" id="search-box" placeholder="Search IP , Character , Colletible for related numbers or search a number to see a list of related IP ,publishers, characters and collectibles">
-        <button onclick="search()">Search</button>
-        <ul id="results"></ul>
+    <h1>Search for Significant Edition Numbers Related to Your Input</h1>
+    <!-- Search form -->
+    <div class="container">
+        <div class="left-column">
+            <input type="text" id="search-box" placeholder="Search IP, Character, Collectible for related numbers or search a number to see a list of related IP, publishers, characters, and collectibles">
+            <button onclick="search()">Search</button>
+            <ul id="results"></ul>
+        </div>
     </div>
-</div>
-<!--Search Function taken from chatgpt discussion -->
-<script>
-    var input = document.getElementById("search-box");
-    input.addeventListener("keypress", function(event) {
-        if (event.keyt === "Enter") {
-            event.preventDefault(): 
-            search();
-        }
-    });
-    
+
+    <!--Search Function taken from chatgpt discussion -->
+    <script>
+        var input = document.getElementById("search-box");
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                search();
+            }
+        });
+
         function search() {
             var query = document.getElementById('search-box').value;
             // Redirect to the Flask route with the search query
-            window.location.href = "/search?q=" + encodeURIComponent(query);
+            window.location.href = "/specialMints/search?q=" + encodeURIComponent(query);
         }
     </script>
 </body>
