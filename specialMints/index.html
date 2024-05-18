@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Mints</title>
-
+    <style>
+        .container {
+            display: flex;
+        }
+        .left-column {
+            flex: 1;
+        }
+        .right-column {
+            flex: 1;
+            padding-left: 20px;
+        }
+    </style>
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/43724279.js"></script>
     <!-- End of HubSpot Embed Code -->
@@ -16,7 +27,6 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     </script>
-
 </head>
 <body>
     <h1>Search for Significant Edition Numbers Related to Your Input</h1>
@@ -29,7 +39,7 @@
         </div>
     </div>
 
-    <!--Search Function taken from chatgpt discussion -->
+    <!-- Search Function -->
     <script>
         var input = document.getElementById("search-box");
         input.addEventListener("keypress", function(event) {
@@ -42,7 +52,25 @@
         function search() {
             var query = document.getElementById('search-box').value;
             // Redirect to the Flask route with the search query
-            window.location.href = "/specialMints/search?q=" + encodeURIComponent(query);
+            fetch('/specialMints/search?q=' + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                });
+        }
+
+        function displayResults(data) {
+            var resultsList = document.getElementById('results');
+            resultsList.innerHTML = '';
+            if (data.error) {
+                resultsList.innerHTML = '<li>' + data.error + '</li>';
+                return;
+            }
+            data.forEach(item => {
+                var li = document.createElement('li');
+                li.textContent = `Title: ${item.title}, Publisher: ${item.publisher}, Release Date: ${item.release_date}, Edition: ${item.edition}`;
+                resultsList.appendChild(li);
+            });
         }
     </script>
 </body>
