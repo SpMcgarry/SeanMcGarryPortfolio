@@ -38,13 +38,30 @@ def search():
     query = requests.args.get('q','')
     if not query:
         return jsonify({'error':'Query parameter is required'}
-    conn = get_db_connection()
+    conn = connect_DB()
     cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT c.title, p.name AS publisher, c.release_date, c.edition
+        FROM comics c
+        JOIN publishers p ON c.publisher_id = p.id
+        WHERE c.title LIKE ? OR p.name LIKE ?
+    """, ('%' + query + '%', '%' + query + '%'))
+
 
     results = cursor.fetchall()
     conn.close() 
 
-    return jsonify(results)
+    comics = []
+    for row in results:
+        comics.append({
+            'title': row['title'],
+            'publisher': row['publisher'],
+            'release_date': row['release_date'],
+            'edition': row['edition']
+        })
+
+    return jsonify(comics)
 
 
 if __name__ == '__main__':
