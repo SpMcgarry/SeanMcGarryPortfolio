@@ -16,10 +16,16 @@
             padding-left: 20px;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9F0287R3R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    </script>
 </head>
 <body>
     <h1>Search for Significant Edition Numbers Related to Your Input</h1>
-    <!-- Search form -->
     <div class="container">
         <div class="left-column">
             <input type="text" id="search-box" placeholder="Search IP, Character, Collectible for related numbers or search a number to see a list of related IP, publishers, characters, and collectibles">
@@ -27,28 +33,27 @@
             <ul id="results"></ul>
         </div>
     </div>
-
-    <!-- Search Function -->
     <script>
-        // Function to handle search
-        function search() {
-    var query = document.getElementById('search-box').value;
-    fetch('https://SpMcGry.pythonanywhere.com/search?q=' + encodeURIComponent(query))
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+        var input = document.getElementById("search-box");
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                search();
             }
-            return response.json();
-        })
-        .then(data => {
-            displayResults(data);
-        })
-        .catch(error => {
-            console.error('Error fetching search results:', error);
         });
-}
 
-        // Function to display search results
+        function search() {
+            var query = document.getElementById('search-box').value;
+            fetch('https://SpMcGry.pythonanywhere.com/search?q=' + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                });
+        }
+
         function displayResults(data) {
             var resultsList = document.getElementById('results');
             resultsList.innerHTML = '';
@@ -58,14 +63,6 @@
                 resultsList.appendChild(li);
             });
         }
-
-        // Event listener for pressing Enter key
-        document.getElementById("search-box").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                search();
-            }
-        });
     </script>
 </body>
 </html>
